@@ -26,10 +26,29 @@ class ItemDetailScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(item.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Text('Quantity: ${item.quantity}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 16),
+            if (item.details.isNotEmpty) ...[
+              const Text('Product Details:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.grey[300]!),
+                ),
+                child: Text(
+                  item.details,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
             const Spacer(),
             Row(
               children: [

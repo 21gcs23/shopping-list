@@ -14,11 +14,13 @@ class _AddItemScreenState extends State<AddItemScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _qtyCtrl = TextEditingController();
+  final _detailsCtrl = TextEditingController();
 
   @override
   void dispose() {
     _nameCtrl.dispose();
     _qtyCtrl.dispose();
+    _detailsCtrl.dispose();
     super.dispose();
   }
 
@@ -26,8 +28,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
     if (!_formKey.currentState!.validate()) return;
     final name = _nameCtrl.text.trim();
     final qty = int.tryParse(_qtyCtrl.text.trim()) ?? 0;
+    final details = _detailsCtrl.text.trim();
     Provider.of<ShoppingProvider>(context, listen: false)
-        .addItem(name: name, quantity: qty);
+        .addItem(name: name, quantity: qty, details: details);
     Navigator.pop(context);
   }
 
@@ -68,6 +71,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
                   }
                   return null;
                 },
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _detailsCtrl,
+                decoration: const InputDecoration(
+                  labelText: 'Product Details',
+                  hintText: 'Enter product description or details',
+                ),
+                maxLines: 3,
+                keyboardType: TextInputType.multiline,
               ),
               const SizedBox(height: 24),
               Row(

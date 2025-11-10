@@ -9,8 +9,8 @@ class ShoppingProvider extends ChangeNotifier {
 
   final _uuid = Uuid();
 
-  void addItem({required String name, required int quantity}) {
-    final item = ShoppingItem(id: _uuid.v4(), name: name, quantity: quantity);
+  void addItem({required String name, required int quantity, String details = ''}) {
+    final item = ShoppingItem(id: _uuid.v4(), name: name, quantity: quantity, details: details);
     _items.add(item);
     notifyListeners();
   }
